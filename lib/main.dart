@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:learn_sqflite/student_details_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
-      home: const LearnSqfScreen(),
+      home: StudentDetailsScreen(),
     );
   }
 }
@@ -103,30 +103,4 @@ class _LearnSqfScreenState extends State<LearnSqfScreen> {
   }
 }
 
-class DataBaseHelper {
-  Future<String> createDatabase() async {
-    // get you storage path
-    var path = await getDatabasesPath();
-    // create your database
-    var database = "$path/users.db";
-    // return database
-    return database;
-  }
 
-  Future<Database> createTables() async {
-    var dbase = await createDatabase();
-    return await openDatabase(dbase, version: 1,
-        onCreate: (Database db, int version) async {
-      // create table//
-      var tableQuery =
-          "CREATE TABLE 'students' ('id' INTEGER PRIMARY KEY,'name' TEXT, 'age' INTEGER, 'gender' TEXT ) ";
-      await db.execute(tableQuery);
-    });
-  }
-
-  insertData() async {
-    var db = await createTables();
-    await db.insert(
-        "students", {'name': "Jyotiya", "age": 100, 'gender': "Female"});
-  }
-}
