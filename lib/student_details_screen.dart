@@ -18,6 +18,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   var databaseHelper = DataBaseHelper();
 
   // TextEditingController nameController = TextEditingController();
+  var studentKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +26,64 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
       appBar: AppBar(
         title: const Text("Student Details"),
       ),
-      body: Column(
-        children: [
-          myTextField(nameController, "Name"),
-          myTextField(emailController, "Email"),
-          myTextField(phoneController, "Phone", keyType: TextInputType.number),
-          DropdownButtonFormField(
-              items: ["Married", "Unmarried"]
-                  .map((item) => DropdownMenuItem(
-                        value: item,
-                        child: Text(item),
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                setState(() {
-                  marriageValue = value!;
-                });
-              }),
-          const SizedBox(
-            height: 40,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                databaseHelper.insertStudent(nameController.text,
-                    emailController.text, phoneController.text, marriageValue);
-              },
-              child: const Text("Add Students"))
-        ],
-      ),
+      body: Form(
+          key: studentKey,
+          child: Column(
+            children: [
+              myTextField(nameController, "Name",validatorText: "Name is required"),
+              myTextField(emailController, "Email",validatorText: "Please enter your email"),
+              myTextField(phoneController, "Phone",
+                  keyType: TextInputType.number, maxLength: 10,validatorText: "Enter a valid phone"),
+              DropdownButtonFormField(
+                  items: ["Married", "Unmarried"]
+                      .map((item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(item),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      marriageValue = value!;
+                    });
+                  }),
+              const SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if(studentKey.currentState!.validate()){
+                      databaseHelper.insertStudent(
+                          nameController.text,
+                          emailController.text,
+                          phoneController.text,
+                          marriageValue);
+                    }
+                  },
+                  child: const Text("Add Students")),
+              ElevatedButton(
+                  onPressed: () {
+                   databaseHelper.getStudentData();
+                  },
+                  child: const Text("Get Students"))
+            ],
+          )),
     );
   }
 
   Widget myTextField(TextEditingController controller, String hintText,
-      {TextInputType keyType = TextInputType.text}) {
+      {TextInputType keyType = TextInputType.text, int? maxLength,String? validatorText}) {
     return TextFormField(
       controller: controller,
       keyboardType: keyType,
-      decoration: InputDecoration(hintText: hintText),
+      maxLength: maxLength,
+      validator: (text) {
+        if (text?.isEmpty == true) {
+          return validatorText;
+        } else {
+          return null;
+        }
+      },
+      decoration: InputDecoration(hintText: hintText,counterText:""),
     );
   }
 }

@@ -31,4 +31,10 @@ class DataBaseHelper {
       'marital_status': maritalStatus
     });
   }
+
+  getStudentData()async{
+    var db = await createTables();
+    var data = await db.query("students");
+    print(data);
+  }
 }
