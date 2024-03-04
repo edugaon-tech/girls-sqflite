@@ -19,6 +19,10 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
 
   // TextEditingController nameController = TextEditingController();
   var studentKey = GlobalKey<FormState>();
+  String nameText = "";
+  String emailText = "";
+  String phoneText = "";
+  String statusText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,14 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
           key: studentKey,
           child: Column(
             children: [
-              myTextField(nameController, "Name",validatorText: "Name is required"),
-              myTextField(emailController, "Email",validatorText: "Please enter your email"),
+              myTextField(nameController, "Name",
+                  validatorText: "Name is required"),
+              myTextField(emailController, "Email",
+                  validatorText: "Please enter your email"),
               myTextField(phoneController, "Phone",
-                  keyType: TextInputType.number, maxLength: 10,validatorText: "Enter a valid phone"),
+                  keyType: TextInputType.number,
+                  maxLength: 10,
+                  validatorText: "Enter a valid phone"),
               DropdownButtonFormField(
                   items: ["Married", "Unmarried"]
                       .map((item) => DropdownMenuItem(
@@ -51,7 +59,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    if(studentKey.currentState!.validate()){
+                    if (studentKey.currentState!.validate()) {
                       databaseHelper.insertStudent(
                           nameController.text,
                           emailController.text,
@@ -62,16 +70,22 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                   child: const Text("Add Students")),
               ElevatedButton(
                   onPressed: () {
-                   databaseHelper.getStudentData();
+                    getStudentData();
                   },
-                  child: const Text("Get Students"))
+                  child: const Text("Get Students")),
+              Text("Name: $nameText"),
+              Text("Email: $emailText"),
+              Text("Phone: $phoneText"),
+              Text("Status: $statusText"),
             ],
           )),
     );
   }
 
   Widget myTextField(TextEditingController controller, String hintText,
-      {TextInputType keyType = TextInputType.text, int? maxLength,String? validatorText}) {
+      {TextInputType keyType = TextInputType.text,
+      int? maxLength,
+      String? validatorText}) {
     return TextFormField(
       controller: controller,
       keyboardType: keyType,
@@ -83,7 +97,22 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
           return null;
         }
       },
-      decoration: InputDecoration(hintText: hintText,counterText:""),
+      decoration: InputDecoration(hintText: hintText, counterText: ""),
     );
+  }
+
+  getStudentData()async{
+    var data = await DataBaseHelper().getStudentData();
+    var name = data[1]['name'];
+    nameText = name.toString();
+    var email= data[1]["email"];
+    emailText=email.toString();
+    var phone = data[2]["phone"];
+    phoneText = phone.toString();
+    var status = data[1]["marital_status"];
+    statusText = status.toString();
+    setState(() {});
+    var names = await DataBaseHelper().getColumnData();
+    print(names);
   }
 }

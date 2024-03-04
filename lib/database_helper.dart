@@ -32,9 +32,12 @@ class DataBaseHelper {
     });
   }
 
-  getStudentData()async{
+  Future<List<Map<String, Object?>>> getStudentData()async{
     var db = await createTables();
-    var data = await db.query("students");
-    print(data);
+    return await db.query("students");
+  }
+  Future<List<Map<String, Object?>>> getColumnData()async{
+    var db = await createTables();
+    return await db.query("students",columns:['name','email'] );
   }
 }
