@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'hive/hive_screen.dart';
 
 void main() {
+  Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LearnSqfScreen(),
+      home: const HiveScreen(),
     );
   }
 }
