@@ -70,7 +70,8 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                   child: const Text("Add Students")),
               ElevatedButton(
                   onPressed: () {
-                    getStudentData();
+                    // getStudentData();
+                    getSingleRowData();
                   },
                   child: const Text("Get Students")),
               Text("Name: $nameText"),
@@ -114,5 +115,21 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
     setState(() {});
     var names = await DataBaseHelper().getColumnData();
     print(names);
+  }
+
+  getSingleRowData()async{
+    var data = await DataBaseHelper().getRowData(2);
+    if(data.isNotEmpty){
+      var name = data.first['name'];
+      print(data);
+      nameText = name.toString();
+      statusText = data.first["marital_status"].toString();
+      setState(() {
+
+      });
+    }else{
+      print("No data found");
+    }
+
   }
 }

@@ -32,12 +32,23 @@ class DataBaseHelper {
     });
   }
 
+  // get entire table's data
   Future<List<Map<String, Object?>>> getStudentData()async{
     var db = await createTables();
     return await db.query("students");
   }
+
+  // get data based on columns
   Future<List<Map<String, Object?>>> getColumnData()async{
     var db = await createTables();
     return await db.query("students",columns:['name','email'] );
   }
+
+  // get data based on row
+  Future<List<Map<String, Object?>>> getRowData(int id)async{
+    var db = await createTables();
+     return await db.query("students",where: 'id = ?',whereArgs:[id] );
+  }
+
+
 }
