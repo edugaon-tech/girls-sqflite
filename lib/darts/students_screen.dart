@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_sqflite/db_helper.dart';
 
 import '../database_helper.dart';
 
@@ -23,7 +24,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
                 return Text("${students[index]['email'].toString()} ${students[index]['name'].toString()}");
               } )),
           ElevatedButton(onPressed: (){
-            getAllStudents();
+            DBHelper().createTable();
+            // getAllStudents();
           }, child: const Text("Get Students"))
         ],
       ),
