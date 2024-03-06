@@ -15,7 +15,6 @@ class _StudentsScreenState extends State<StudentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
         children: [
           Expanded(child: ListView.builder(
@@ -25,11 +24,10 @@ class _StudentsScreenState extends State<StudentsScreen> {
               } )),
           ElevatedButton(onPressed: (){
             getAllStudents();
-          }, child: Text("Get Students"))
+          }, child: const Text("Get Students"))
         ],
       ),
     );
-
   }
 
   getAllStudents()async{
