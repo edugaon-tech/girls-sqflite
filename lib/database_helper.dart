@@ -50,5 +50,9 @@ class DataBaseHelper {
      return await db.query("students",where: 'id = ?',whereArgs:[id] );
   }
 
+  updateData(Map<String, Object?> data,int id)async{
+    var db = await createTables();
+    await db.update("students",data ,where: "name =?",whereArgs:["Kajal"]);
+  }
 
 }
