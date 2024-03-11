@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/darts/students_screen.dart';
-import 'package:learn_sqflite/student_details_screen.dart';
+import 'package:learn_sqflite/user/users_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: StudentDetailsScreen(),
+      home: UserScreen(),
     );
   }
 }

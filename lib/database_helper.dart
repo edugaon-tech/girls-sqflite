@@ -10,7 +10,7 @@ class DataBaseHelper {
     return database;
   }
 
-  Future<Database> createTables() async {
+  Future<Database> initDatabase() async {
     var dbase = await createDatabase();
     return await openDatabase(dbase, version: 1,
         onCreate: (Database db, int version) async {
@@ -23,7 +23,7 @@ class DataBaseHelper {
 
   insertStudent(
       String name, String email, String phone, String maritalStatus) async {
-    var db = await createTables();
+    var db = await initDatabase();
     await db.insert("students", {
       'name': name,
       "email": email,
@@ -34,25 +34,30 @@ class DataBaseHelper {
 
   // get entire table's data
   Future<List<Map<String, Object?>>> getStudentData()async{
-    var db = await createTables();
+    var db = await initDatabase();
     return await db.query("students");
   }
 
   // get data based on columns
   Future<List<Map<String, Object?>>> getColumnData()async{
-    var db = await createTables();
+    var db = await initDatabase();
     return await db.query("students",columns:['name','email'] );
   }
 
   // get data based on row
   Future<List<Map<String, Object?>>> getRowData(int id)async{
-    var db = await createTables();
-     return await db.query("students",where: 'id = ?',whereArgs:[id] );
+    var db = await initDatabase();
+     return await db.query("students",where: 'id = ?',whereArgs:[10] );
+  }
+// update data in the table
+  updateData(Map<String, Object?> data,int id)async{
+    var db = await initDatabase();
+    await db.update("students",data ,where: "id =?",whereArgs:[id]);
   }
 
-  updateData(Map<String, Object?> data,int id)async{
-    var db = await createTables();
-    await db.update("students",data ,where: "name =?",whereArgs:["Kajal"]);
+  deleteRow(int id)async{
+    var db = await initDatabase();
+    await db.delete("students",where: "id = ?",whereArgs:[id]);
   }
 
 }

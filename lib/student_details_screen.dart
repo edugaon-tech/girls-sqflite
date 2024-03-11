@@ -72,11 +72,11 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                   onPressed: () {
                     // getStudentData();
                     // getSingleRowData();
-                    DataBaseHelper().updateData(
-                      {
-                        "name":"Kajal Kumari"
-                      },3
-                    );
+                    // DataBaseHelper().updateData(
+                    //   {
+                    //     "name":"Kajal Kumari"
+                    //   },3
+                    // );
                     // DataBaseHelper().insertStudent("Kajal", "emailKajal@gmail.com", "8743532761325", "Unknown");
                     // DataBaseHelper().insertStudent("Pooja", "gupta@gmail.com", "874351325", "Well Unknown");
                     // DataBaseHelper().insertStudent("Sakshi", "sakshi@gmail.com", "2761325", "Unknown");
