@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:learn_sqflite/database_helper.dart';
+import 'package:learn_sqflite/models/users_model.dart';
 import 'package:learn_sqflite/user/add_user_screen.dart';
 import 'package:learn_sqflite/user/update_user_screen.dart';
 
 class UserScreen extends StatefulWidget {
    UserScreen({super.key});
-  String a = "";
-  UserScreen.first(this.a);
-  UserScreen.second();
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -43,7 +41,7 @@ class _UserScreenState extends State<UserScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Name: ${users[i]['name'].toString()}"),
+                      Text(UserModel().name.toString()),
                       Text("Email: ${users[i]['email'].toString()}"),
                       Text("Phone: ${users[i]['phone'].toString()}"),
                       Text("Marital: ${users[i]['marital_status'].toString()}"),
