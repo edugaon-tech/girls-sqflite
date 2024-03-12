@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/db_helper.dart';
+import 'package:learn_sqflite/db/db_helper.dart';
 
-import '../database_helper.dart';
+import '../db/database_helper.dart';
 
 class StudentsScreen extends StatefulWidget {
   const StudentsScreen({super.key});

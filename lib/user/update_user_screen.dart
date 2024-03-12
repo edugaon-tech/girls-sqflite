@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/database_helper.dart';
+import 'package:learn_sqflite/db/database_helper.dart';
 
 class UpdateUserScreen extends StatefulWidget {
   final String name;

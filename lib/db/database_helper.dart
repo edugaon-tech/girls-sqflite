@@ -1,3 +1,4 @@
+import 'package:learn_sqflite/models/users_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DataBaseHelper {
@@ -21,15 +22,9 @@ class DataBaseHelper {
     });
   }
 
-  insertStudent(
-      String name, String email, String phone, String maritalStatus) async {
+  insertStudent(UserModel data) async {
     var db = await initDatabase();
-    await db.insert("students", {
-      'name': name,
-      "email": email,
-      'phone': phone,
-      'marital_status': maritalStatus
-    });
+    await db.insert("students",data.convertModelToMap() );
   }
 
   // get entire table's data

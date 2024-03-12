@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/database_helper.dart';
+import 'package:learn_sqflite/db/database_helper.dart';
 import 'package:learn_sqflite/models/users_model.dart';
 import 'package:learn_sqflite/user/add_user_screen.dart';
 import 'package:learn_sqflite/user/update_user_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/database_helper.dart';
+import 'package:learn_sqflite/db/database_helper.dart';
 import 'package:learn_sqflite/models/users_model.dart';
 
 class AddUserScreen extends StatefulWidget {
@@ -49,12 +49,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
   }
 
   addNewUser() {
-    DataBaseHelper().insertStudent(nameController.text, emailController.text,
-        phoneController.text, maritalController.text);
-
-   var data =  UserModel(email: emailController.text,
+    var data = UserModel(email: emailController.text,
         maritalStatus: maritalController.text,
         name: nameController.text,
-        phone: phoneController.text).convertModelToMap();
+        phone: phoneController.text);
+    DataBaseHelper().insertStudent(data);
   }
 }
