@@ -32,7 +32,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Update User"),),
+      appBar: AppBar(title: const Text("Update User"),),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -52,7 +52,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
             ElevatedButton(onPressed: (){
               updateUserData();
               Navigator.pop(context);
-            }, child: Text("Update User"))
+            }, child: const Text("Update User"))
           ],
         ),
       ),
