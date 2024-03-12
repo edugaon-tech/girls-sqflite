@@ -4,7 +4,10 @@ import 'package:learn_sqflite/user/add_user_screen.dart';
 import 'package:learn_sqflite/user/update_user_screen.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({super.key});
+   UserScreen({super.key});
+  String a = "";
+  UserScreen.first(this.a);
+  UserScreen.second();
 
   @override
   State<UserScreen> createState() => _UserScreenState();
