@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_sqflite/screens/home_screen.dart';
-import 'package:learn_sqflite/students/students_screen.dart';
+import 'package:learn_sqflite/app_life_cycle.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: false,
+        useMaterial3: true,
       ),
-      home: StudentScreen(),
+      home: AppLifeCycleExample(),
     );
   }
 }
